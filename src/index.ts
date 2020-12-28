@@ -15,10 +15,10 @@ router.get('/randomMovie', (ctx, next) => {
     ctx.body = controller.getRandomMovie(); 
 })
 
-router.get('/poster/:posterId', (ctx, next) => {
-    const controller = new MovieSelectionController();
-    ctx.body = controller.getMoviePoster(ctx.params.posterId);
-})
+// router.get('/poster/:posterId', (ctx, next) => {
+//     const controller = new MovieSelectionController();
+//     ctx.body = controller.getMoviePoster(ctx.params.posterId);
+// })
 
 
 
