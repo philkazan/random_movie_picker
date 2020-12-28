@@ -1,0 +1,91 @@
+swagger: "2.0"
+info:
+  description: "The Random Movie Picker service picks a random movie from a list!"
+  version: "1.0.0"
+  title: "Random Movie Picker"
+host: "www.heroku.com"
+basePath: "/"
+schemes:
+- "https"
+- "http"
+paths:
+  /randomMovie:
+    get:
+      tags:
+      - "movie"
+      summary: "Get a random movie."
+      description: ""
+      operationId: "getRandomMovie"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successfully fetched a random movie"
+          schema:
+            $ref: "#/definitions/Movie"
+  /availableMovies:
+    get:
+      tags:
+      - "movie"
+      summary: "Get list of all available movies"
+      description: ""
+      operationId: "getAvailableMovies"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successfully fetched list of all available movies"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Movie"
+  /health:
+    get:
+      tags:
+      - "health"
+      summary: "Get service's health status"
+      description: ""
+      operationId: "getHealth"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successfully fetched service's health status"
+          schema:
+            $ref: "#/definitions/HealthStatus"
+            
+definitions:
+  Movie:
+    type: "object"
+    required:
+      - title
+      - releaseYear
+      - poster
+      - hasBeenWatched
+    properties:
+      title:
+        type: "string"
+        description: "Movie's title"
+      releaseYear:
+        type: "string"
+        description: "Movie's release year"
+      poster:
+        type: "string"
+        description: "URI that points to Movie's poster"
+      hasBeenWatched:
+        type: "boolean"
+        description: "Flag shows if movie has been watched or not"
+  HealthStatus:
+    type: "object"
+    required:
+      - serviceName
+      - serviceVersion
+    properties:
+      serviceName:
+        type: "string"
+        description: "Name of the service"
+      serviceVersion:
+        type: "string"
+        description: "Version of the service"
+      
+ 
