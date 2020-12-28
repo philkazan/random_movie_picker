@@ -15,6 +15,13 @@ router.get('/randomMovie', (ctx, next) => {
     ctx.body = controller.getRandomMovie(); 
 })
 
+router.get('/health', (ctx, next) => {
+    ctx.body = {
+        "serviceName": "random_movie_picker",
+        "serviceVersion": "0.0.1"
+    }
+})
+
 // router.get('/poster/:posterId', (ctx, next) => {
 //     const controller = new MovieSelectionController();
 //     ctx.body = controller.getMoviePoster(ctx.params.posterId);
