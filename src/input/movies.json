@@ -1,290 +1,284 @@
 [
     {
         "title": "3 Ninjas",
-        "year": "1992",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1992",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/3_ninjas/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "3 Ninjas Kick Back",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/3_ninjas_kick_back/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "3 Ninjas Knuckle Up",
-        "year": "1995",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1995",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/3_ninjas_knuckle_up/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "3 Ninjas: High Moon at Mega Mountain",
-        "year": "1998",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1998",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Air Bud",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/air_bud/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Baby's Day Out",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/babys_day_out/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Blank Check",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/blank_check/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Cool As Ice",
-        "year": "1991",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1991",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/cool_as_ice/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
-        "title": "Dennise the Menace",
-        "year": "1993",
-        "poster": "",
-        "audio_clip": ""
+        "title": "Dennis the Menace",
+        "releaseYear": "1993",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/dennis_the_menace/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Dr. DoLittle",
-        "year": "1998",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1998",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/dr_dolittle/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Ed",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/ed/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Ernest Goes to Africa",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
-    },    
-    {
-        "title": "Ernest saves Christmas",
-        "year": "1988",
-        "poster": "",
-        "audio_clip": ""
-    },    
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/ernest_goes_to_africa/poster/poster.jpg",
+        "hasBeenWatched": false
+    },       
     {
         "title": "First Kid",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/first_kid/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "George of the Jungle",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/george_of_the_jungle/poster/poster.jfif",
+        "hasBeenWatched": false
     },    
     {
         "title": "H-E Double Hockey Sticks",
-        "year": "1999",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1999",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/h_e_double_hockey_sticks/poster/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Heavy Weights",
-        "year": "1995",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1995",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },      
     {
         "title": "Hook",
-        "year": "1991",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1991",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Horse Sense",
-        "year": "1999",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1999",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Inspector Gadget",
-        "year": "1999",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1999",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Jumanji",
-        "year": "1995",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1995",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Jungle 2 Jungle",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": true
     },    
     {
         "title": "Kazaam",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },       
     {
         "title": "Land Before Time 2: The Great Valley Adventure",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Land Before Time 3: The Time of the Great Giving",
-        "year": "1995",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1995",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Land Before Time 4: Journey Through the Mists",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },    
     {
         "title": "Land Before Time 5: The Mysterious Island",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },           
     {
         "title": "Last Action Hero",
-        "year": "1993",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1993",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Little Giants",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Little Rascals",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Marios Bros",
-        "year": "1993",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1993",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Matilda",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Mighty Ducks: D2",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Mortal Kombat Annihilation",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Mrs Doubtfire",
-        "year": "1993",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1993",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Nutty Professor",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "PageMaster",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Parent Trap",
-        "year": "1998",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1998",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Richie Rich",
-        "year": "1994",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1994",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Rush Hour",
-        "year": "1998",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1998",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Small Soldiers",
-        "year": "1998",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1998",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Space Jam",
-        "year": "1996",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1996",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Spawn",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Spice World",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Steel",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "The 6th Man",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "The Big Green",
-        "year": "1995",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1995",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     },
     {
         "title": "Warriors of Virtue",
-        "year": "1997",
-        "poster": "",
-        "audio_clip": ""
+        "releaseYear": "1997",
+        "poster": "https://random-movie-picker.s3.amazonaws.com/corky_romano/poster.jpg",
+        "hasBeenWatched": false
     }
 ]
