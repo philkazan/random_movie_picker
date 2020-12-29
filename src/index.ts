@@ -7,15 +7,24 @@ const router = new Router();
 
 router.get('/availableMovies', (ctx, next) => {
     const controller = new MovieSelectionController();
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = controller.getAvailableMovies(); 
 })
 
 router.get('/randomMovie', (ctx, next) => {
     const controller = new MovieSelectionController();
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = controller.getRandomMovie(); 
 })
 
 router.get('/health', (ctx, next) => {
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = {
         "serviceName": "random_movie_picker",
         "serviceVersion": "0.0.1"
