@@ -6,17 +6,23 @@
   "scripts": {
     "build": "tsc",
     "start": "node --harmony ./dist/index",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --package ./package.json -r ts-node/register --spec ./test/**/*.test.ts"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/koa": "^2.11.6"
+    "@koa/router": "10.0.0",
+    "@types/chai": "4.2.14",
+    "@types/koa": "2.11.6",
+    "@types/koa-router": "7.4.1",
+    "@types/mocha": "8.2.0",
+    "chai": "4.2.0",
+    "mocha": "8.2.1",
+    "ts-node": "^9.1.1"
   },
   "dependencies": {
-    "@koa/router": "^10.0.0",
-    "@types/koa-router": "^7.4.1",
     "koa": "2.13.0",
-    "typescript": "^4.1.3"
-  }
+    "typescript": "4.1.3"
+  },
+  "mocha": {}
 }
