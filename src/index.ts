@@ -5,20 +5,36 @@ import { MovieSelectionController } from './controller/movieSelectionController'
 const app = new Koa();
 const router = new Router();
 
-router.get('/availableMovies', (ctx, next) => {
+router.get('/availableMovies', async (ctx, next) => {
     const controller = new MovieSelectionController();
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     ctx.set('Access-Control-Allow-Methods', 'GET');
-    ctx.body = controller.getAvailableMovies(); 
+    ctx.body = await controller.getAvailableMovies(); 
 })
 
-router.get('/randomMovie', (ctx, next) => {
+router.get('/randomMovie', async (ctx, next) => {
     const controller = new MovieSelectionController();
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     ctx.set('Access-Control-Allow-Methods', 'GET');
-    ctx.body = controller.getRandomMovie(); 
+    ctx.body = await controller.getRandomMovie(); 
+})
+
+router.post('/movie', async (ctx, next) => {
+    const controller = new MovieSelectionController();
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.body = await controller.addMovie(); 
+})
+
+router.put('/movie', async (ctx, next) => {
+    const controller = new MovieSelectionController();
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.body = await controller.patchMovie(); 
 })
 
 router.get('/health', (ctx, next) => {
@@ -27,7 +43,7 @@ router.get('/health', (ctx, next) => {
     ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = {
         "serviceName": "random_movie_picker",
-        "serviceVersion": "0.0.1"
+        "serviceVersion": "0.0.2"
     }
 })
 

@@ -1,22 +1,59 @@
 import { Movie } from '../resource/movie';
+import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
+import { unmarshall } from '@aws-sdk/util-dynamodb';
 
 export class MovieSelectionService { 
-    getAvailableMovies() {
-        const inputFile: Movie[] = require('../../input/movies.json');
-        return inputFile;
+    async getAvailableMovies() {
+        const credentials = {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        }
+
+        const client = new DynamoDBClient({ credentials, region: "us-east-1" });
+        const command = new ScanCommand({
+            TableName: "random-movie-picker-movies"
+        });
+
+        let availableMovies;
+
+        try {
+            availableMovies = await client.send(command);
+            console.log(`Returned movie count: ${availableMovies.ScannedCount}`);
+        } catch (err) {
+            console.log(err);
+        }
+        let unmarshalled = availableMovies.Items.map(m => unmarshall(m) );
+        return unmarshalled;
     }
 
-    getRandomMovie() {
-        const availableMovies: Movie[] = require('../../input/movies.json');
-        const randomIndex = Math.floor(Math.random() * availableMovies.length)
-        return availableMovies[randomIndex];
+    async getRandomMovie() {
+        const credentials = {
+            accessKeyId: process.env.AWS_ACCESS_KEY,
+            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+        }
+
+        const client = new DynamoDBClient({ credentials, region: "us-east-1" });
+        const command = new ScanCommand({
+            TableName: "random-movie-picker-movies"
+        });
+
+        let availableMovies;
+
+        try {
+            availableMovies = await client.send(command);
+            console.log(`Returned movie count: ${availableMovies.ScannedCount}`);
+        } catch (err) {
+            console.log(err);
+        }
+        const randomIndex = Math.floor(Math.random() * availableMovies.Items.length)
+        return unmarshall(availableMovies.Items[randomIndex]);
     }
 
-    addMovie() {
-        // not implemented
+    async addMovie() {
+        throw new Error('This enpoint ain\'t been implemented');
     }
 
-    editMovie() {
-        // not implemented
+    async patchMovie() {
+        throw new Error('This enpoint ain\'t been implemented');
     }
 } 
