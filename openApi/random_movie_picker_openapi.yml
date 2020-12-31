@@ -1,7 +1,7 @@
 swagger: "2.0"
 info:
   description: "The Random Movie Picker service picks a random movie from a list!"
-  version: "1.0.0"
+  version: "0.0.2"
   title: "Random Movie Picker"
 host: "random-movie-picker-kazan.herokuapp.com"
 basePath: "/"
