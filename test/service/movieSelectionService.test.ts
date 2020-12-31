@@ -21,4 +21,11 @@ describe('MovieSelectionService', () => {
             expect(result).to.have.all.keys('releaseYear','title', 'poster', 'hasBeenWatched');
         })
     })
+    describe('addMovie', () => {
+        // what should this function do?
+    })
+    describe('patchMovie', () => {
+        // what should this function do?
+        // ES6 vs CommonJS?
+    })
 })
