@@ -3,7 +3,7 @@ import { MovieSelectionService } from '../service/movieSelectionService';
 import * as SERVICES from '../constants/services';
 import { inject, injectable } from 'inversify';
 
-@injectable
+@injectable()
 export class MovieSelectionController { 
     private _movieSelectionService: MovieSelectionService;
     constructor(
