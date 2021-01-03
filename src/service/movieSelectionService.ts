@@ -1,15 +1,19 @@
 import { Movie } from '../resource/movie';
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
+import { injectable, inject } from 'inversify';
+import * as CONSTANTS from '../constants/clients'
 
+@injectable()
 export class MovieSelectionService { 
-    async getAvailableMovies() {
-        const credentials = {
-            accessKeyId: process.env.AWS_ACCESS_KEY,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        }
+    private _dbClient: DynamoDBClient;
+    constructor(
+        @inject(CONSTANTS.CLIENTS.DYNAMO_CLIENT) dynamoDBClient: DynamoDBClient
+    ) {
+        this._dbClient = dynamoDBClient;
+    }
 
-        const client = new DynamoDBClient({ credentials, region: "us-east-1" });
+    async getAvailableMovies() {
         const command = new ScanCommand({
             TableName: "random-movie-picker-movies"
         });
@@ -17,22 +21,14 @@ export class MovieSelectionService {
         let availableMovies;
 
         try {
-            availableMovies = await client.send(command);
-            console.log(`Returned movie count: ${availableMovies.ScannedCount}`);
+            availableMovies = await this._dbClient.send(command);
         } catch (err) {
             console.log(err);
         }
-        let unmarshalled = availableMovies.Items.map(m => unmarshall(m) );
-        return unmarshalled;
+        return availableMovies.Items.map(m => unmarshall(m) );
     }
 
     async getRandomMovie() {
-        const credentials = {
-            accessKeyId: process.env.AWS_ACCESS_KEY,
-            secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-        }
-
-        const client = new DynamoDBClient({ credentials, region: "us-east-1" });
         const command = new ScanCommand({
             TableName: "random-movie-picker-movies"
         });
@@ -40,7 +36,7 @@ export class MovieSelectionService {
         let availableMovies;
 
         try {
-            availableMovies = await client.send(command);
+            availableMovies = await this._dbClient.send(command);
             console.log(`Returned movie count: ${availableMovies.ScannedCount}`);
         } catch (err) {
             console.log(err);

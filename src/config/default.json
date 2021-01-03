@@ -2,5 +2,10 @@
     "aws": {
         "accessKey": "AQICAHhLd55xIvbWyufTDzE3XMwWzDp6h1sNdwI+FE4TP7nM4AHZWLKhOXusdV23KJMKtGqYAAAAbTBrBgkqhkiG9w0BBwagXjBcAgEAMFcGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMzdc83tXuGEkgHV+VAgEQgCpLgHd/OLgfAAQMu8YDDFDP9VDvNQRRxuNnBPbKZ0FFW73HjaO7ibXYlmw=",
         "secretAccessKey": "AQICAHhLd55xIvbWyufTDzE3XMwWzDp6h1sNdwI+FE4TP7nM4AGoXo66pk0LHcP6yt+S9Lv0AAAAfDB6BgkqhkiG9w0BBwagbTBrAgEAMGYGCSqGSIb3DQEHATAeBglghkgBZQMEAS4wEQQMmFa17GZ3gBtVZJ/dAgEQgDlztGpppkUAnuGCFPnevb7xoQnn6O5AihxBsNbGz8Pok653xoR8FMm/k/1v7LjFL2upF13Xg/jcHB0="
+    },
+    "dynamo": {
+        "region": "us-east-1",
+        
+
     }
 }
