@@ -1,6 +1,3 @@
-import { Movie } from '../resource/movie';
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
-import { unmarshall } from '@aws-sdk/util-dynamodb';
 import { injectable, inject } from 'inversify';
 import CLIENTS from '../constants/clients'
 import { LocalDynamoClient } from '../client/localDynamoClient';
