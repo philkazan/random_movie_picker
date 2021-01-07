@@ -2,42 +2,34 @@ import { Movie } from '../resource/movie';
 import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
 import { injectable, inject } from 'inversify';
-import * as CONSTANTS from '../constants/clients'
+import CLIENTS from '../constants/clients'
+import { LocalDynamoClient } from '../client/localDynamoClient';
 
 @injectable()
 export class MovieSelectionService { 
-    private _dbClient: DynamoDBClient;
+    private _dbClient;
     constructor(
-        @inject(CONSTANTS.CLIENTS.DYNAMO_CLIENT) dynamoDBClient: DynamoDBClient
+        @inject(CLIENTS.DYNAMO_CLIENT) localDynamoClient: LocalDynamoClient
     ) {
-        this._dbClient = dynamoDBClient;
+        this._dbClient = localDynamoClient;
     }
-
+    
     async getAvailableMovies() {
-        const command = new ScanCommand({
-            TableName: "random-movie-picker-movies"
-        });
-
         let availableMovies;
 
         try {
-            availableMovies = await this._dbClient.send(command);
+            availableMovies = await this._dbClient.scan();
         } catch (err) {
             console.log(err);
         }
-        return availableMovies.Items.map(m => unmarshall(m) );
+        return availableMovies;
     }
 
     async getRandomMovie() {
-        const command = new ScanCommand({
-            TableName: "random-movie-picker-movies"
-        });
-
         let availableMovies;
 
         try {
-            availableMovies = await this._dbClient.send(command);
-            console.log(`Returned movie count: ${availableMovies.ScannedCount}`);
+            availableMovies = await this._dbClient.scan();
         } catch (err) {
             console.log(err);
         }

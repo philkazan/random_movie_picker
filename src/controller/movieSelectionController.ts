@@ -1,13 +1,13 @@
 import { Movie } from '../resource/movie';
 import { MovieSelectionService } from '../service/movieSelectionService';
-import * as SERVICES from '../constants/services';
+import SERVICES from '../constants/services';
 import { inject, injectable } from 'inversify';
 
 @injectable()
 export class MovieSelectionController { 
     private _movieSelectionService: MovieSelectionService;
     constructor(
-        @inject(SERVICES.SERVICES.PRIMARY) MovieSelectionService
+        @inject(SERVICES.PRIMARY) MovieSelectionService
     ) {
         this._movieSelectionService = MovieSelectionService;
     }

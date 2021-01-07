@@ -2,23 +2,26 @@ import 'reflect-metadata';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
 import { Container, decorate } from 'inversify';
-import { CLIENTS } from './constants/clients';
-import { CONFIGS } from './constants/configs';
-import { CONTROLLERS } from './constants/controllers';
-import { SERVICES } from './constants/services';
+import CLIENTS from './constants/clients';
+import CONFIGS from './constants/configs';
+import CONTROLLERS from './constants/controllers';
+import SERVICES from './constants/services';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { Client } from '@aws-sdk/smithy-client';
 import * as NConf from 'nconf';
 
 import { MovieSelectionController } from './controller/movieSelectionController';
 import { MovieSelectionService } from './service/movieSelectionService';
-import { injectable } from 'inversify';
+import { injectable, unmanaged } from 'inversify';
 
 
 const app = new Koa();
 const router = new Router();
 const container = new Container();
 
-decorate(injectable(), DynamoDBClient)
+decorate(injectable(), Client);
+decorate(injectable(), DynamoDBClient);
+decorate(unmanaged(), DynamoDBClient, 0);
 
 //TODO put this in a config or something
 // TODO find a less redundant way to add the CORS response headers
