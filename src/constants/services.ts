@@ -2,4 +2,4 @@ const SERVICES = {
     PRIMARY: Symbol('primaryService')
 }
 
-export { SERVICES };
+export default SERVICES;
