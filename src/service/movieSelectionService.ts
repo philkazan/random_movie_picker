@@ -27,14 +27,13 @@ export class MovieSelectionService {
 
     async getRandomMovie() {
         let availableMovies;
-
         try {
             availableMovies = await this._dbClient.scan();
         } catch (err) {
             console.log(err);
         }
-        const randomIndex = Math.floor(Math.random() * availableMovies.Items.length)
-        return unmarshall(availableMovies.Items[randomIndex]);
+        const randomIndex = Math.floor(Math.random() * availableMovies.length)
+        return availableMovies[randomIndex]
     }
 
     async addMovie() {

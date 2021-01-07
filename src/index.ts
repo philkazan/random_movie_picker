@@ -1,15 +1,17 @@
+require('dotenv').config();
 import 'reflect-metadata';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
 import { Container, decorate } from 'inversify';
+import { DynamoDBClient, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
+import { Client } from '@aws-sdk/smithy-client';
 import CLIENTS from './constants/clients';
 import CONFIGS from './constants/configs';
 import CONTROLLERS from './constants/controllers';
 import SERVICES from './constants/services';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { Client } from '@aws-sdk/smithy-client';
 import * as NConf from 'nconf';
 
+import { LocalDynamoClient, LocalDynamoConfig } from './client/localDynamoClient'
 import { MovieSelectionController } from './controller/movieSelectionController';
 import { MovieSelectionService } from './service/movieSelectionService';
 import { injectable, unmanaged } from 'inversify';
@@ -19,21 +21,21 @@ const app = new Koa();
 const router = new Router();
 const container = new Container();
 
-decorate(injectable(), Client);
-decorate(injectable(), DynamoDBClient);
-decorate(unmanaged(), DynamoDBClient, 0);
+// decorate(injectable(), Client);
+// decorate(injectable(), DynamoDBClient);
 
 //TODO put this in a config or something
 // TODO find a less redundant way to add the CORS response headers
-const DynamoClientConfig = {
+const DynamoClientConfig: DynamoDBClientConfig = {
     region: "us-east-1",
-    accessKeyId: process.env.AWS_ACCESS_KEY,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    credentials: {
+        accessKeyId: process.env.AWS_ACCESS_KEY,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
+    }
 }
 
-NConf.file('default', { file: `${__dirname}/config/default.json` });
 container.bind(CONFIGS.DYNAMO_CLIENT_CONFIG).toConstantValue(DynamoClientConfig);
-container.bind(CLIENTS.DYNAMO_CLIENT).to(DynamoDBClient);
+container.bind<DynamoDBClientConfig>(CLIENTS.DYNAMO_CLIENT).to(LocalDynamoClient);
 
 container.bind(CONTROLLERS.PRIMARY).to(MovieSelectionController);
 container.bind(SERVICES.PRIMARY).to(MovieSelectionService);

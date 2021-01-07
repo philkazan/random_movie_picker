@@ -1,4 +1,4 @@
-import { DynamoDBClient, ScanCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBClient, ScanCommand, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import { unmarshall } from '@aws-sdk/util-dynamodb';
 import { Movie } from '../resource/Movie';
 import { injectable, inject } from 'inversify';
@@ -14,14 +14,10 @@ export interface LocalDynamoConfig {
 export class LocalDynamoClient {
 
     private _client: DynamoDBClient;
-    private _config: LocalDynamoConfig;
+    private _config;
 
-    constructor(@inject(CONFIGS.DYNAMO_CLIENT_CONFIG)config: LocalDynamoConfig) {
-        this._config = config;
-        this._client = new DynamoDBClient(this._config);
-    }
-    get config() {
-        return this._config;
+    constructor(@inject(CONFIGS.DYNAMO_CLIENT_CONFIG)config: DynamoDBClientConfig) {
+        this._client = new DynamoDBClient(config);
     }
     async scan(): Promise<any> {
         const command = new ScanCommand({
