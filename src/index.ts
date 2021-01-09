@@ -2,29 +2,24 @@ require('dotenv').config();
 import 'reflect-metadata';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
-import { Container, decorate } from 'inversify';
-import { DynamoDBClient, DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
-import { Client } from '@aws-sdk/smithy-client';
+import { Container } from 'inversify';
+import * as bodyParser from 'koa-bodyparser';
 import CLIENTS from './constants/clients';
 import CONFIGS from './constants/configs';
 import CONTROLLERS from './constants/controllers';
 import SERVICES from './constants/services';
-import * as NConf from 'nconf';
 
-import { LocalDynamoClient, LocalDynamoConfig } from './client/localDynamoClient'
+import { LocalDynamoClient } from './client/localDynamoClient'
+import { DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import { MovieSelectionController } from './controller/movieSelectionController';
 import { MovieSelectionService } from './service/movieSelectionService';
-import { injectable, unmanaged } from 'inversify';
 
 
 const app = new Koa();
 const router = new Router();
 const container = new Container();
 
-// decorate(injectable(), Client);
-// decorate(injectable(), DynamoDBClient);
-
-//TODO put this in a config or something
+// TODO put this in a config or something
 // TODO find a less redundant way to add the CORS response headers
 const DynamoClientConfig: DynamoDBClientConfig = {
     region: "us-east-1",
@@ -34,11 +29,13 @@ const DynamoClientConfig: DynamoDBClientConfig = {
     }
 }
 
-container.bind(CONFIGS.DYNAMO_CLIENT_CONFIG).toConstantValue(DynamoClientConfig);
-container.bind<DynamoDBClientConfig>(CLIENTS.DYNAMO_CLIENT).to(LocalDynamoClient);
+container.bind<DynamoDBClientConfig>(CONFIGS.DYNAMO_CLIENT_CONFIG).toConstantValue(DynamoClientConfig);
+container.bind<LocalDynamoClient>(CLIENTS.DYNAMO_CLIENT).to(LocalDynamoClient);
 
 container.bind(CONTROLLERS.PRIMARY).to(MovieSelectionController);
 container.bind(SERVICES.PRIMARY).to(MovieSelectionService);
+
+app.use(bodyParser());
 
 router.get('/availableMovies', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
@@ -56,13 +53,13 @@ router.get('/randomMovie', async (ctx, next) => {
     ctx.body = await controller.getRandomMovie(); 
 })
 
-// router.post('/movie', async (ctx, next) => {
-//     const controller = new MovieSelectionController();
-//     ctx.set('Access-Control-Allow-Origin', '*');
-//     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     ctx.set('Access-Control-Allow-Methods', 'GET');
-//     ctx.body = await controller.addMovie(); 
-// })
+router.post('/movie', async (ctx, next) => {
+    const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.body = await controller.addMovie(ctx.request.body); 
+})
 
 // router.put('/movie', async (ctx, next) => {
 //     const controller = new MovieSelectionController();
