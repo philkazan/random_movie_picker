@@ -1,10 +1,13 @@
 import { injectable, inject } from 'inversify';
 import CLIENTS from '../constants/clients'
 import { LocalDynamoClient } from '../client/localDynamoClient';
+import { Movie } from '../resource/movie';
+import { v4 } from 'uuid';
+import { MovieValidator } from '../validator/movieValidator';
 
 @injectable()
 export class MovieSelectionService { 
-    private _dbClient;
+    private _dbClient: LocalDynamoClient;
     constructor(
         @inject(CLIENTS.DYNAMO_CLIENT) localDynamoClient: LocalDynamoClient
     ) {
@@ -33,8 +36,15 @@ export class MovieSelectionService {
         return availableMovies[randomIndex]
     }
 
-    async addMovie() {
-        throw new Error('This enpoint ain\'t been implemented');
+    async addMovie(movie: Movie) {
+        movie.id = v4();
+        const mv = new MovieValidator();
+        mv.validate(movie);
+        try {
+            await this._dbClient.putItem(movie);
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     async patchMovie() {
