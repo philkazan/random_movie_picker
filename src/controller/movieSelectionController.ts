@@ -17,8 +17,8 @@ export class MovieSelectionController {
     async getRandomMovie() {
         return this._movieSelectionService.getRandomMovie();
     }
-    async addMovie() {
-        return this._movieSelectionService.addMovie();
+    async addMovie(movie: Movie) {
+        return this._movieSelectionService.addMovie(movie);
     }
     async patchMovie() {
         return this._movieSelectionService.patchMovie();
