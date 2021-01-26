@@ -25,10 +25,10 @@ export class MovieSelectionService {
         return availableMovies;
     }
 
-    async getRandomMovie() {
+    async getRandomMovie(queryOptions) {
         let availableMovies;
         try {
-            availableMovies = await this._dbClient.scan();
+            availableMovies = await this._dbClient.query(queryOptions);
         } catch (err) {
             console.log(err);
         }
@@ -36,18 +36,20 @@ export class MovieSelectionService {
         return availableMovies[randomIndex]
     }
 
-    async addMovie(movie: Movie) {
-        movie.id = v4();
-        const mv = new MovieValidator();
-        mv.validate(movie);
-        try {
-            await this._dbClient.putItem(movie);
-        } catch (err) {
-            console.log(err);
-        }
-    }
+    // async addMovie(movie: Movie) {
+    //     movie.id = v4();
+    //     const mv = new MovieValidator();
+    //     mv.validate(movie);
+    //     let result;
+    //     try {
+    //         result = await this._dbClient.putItem(movie);
+    //     } catch (err) {
+    //         console.log(err);
+    //     }
+    //     return result;
+    // }
 
-    async patchMovie() {
-        throw new Error('This enpoint ain\'t been implemented');
-    }
+    // async patchMovie() {
+    //     throw new Error('This enpoint ain\'t been implemented');
+    // }
 } 

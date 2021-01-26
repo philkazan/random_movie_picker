@@ -14,14 +14,14 @@ export class MovieSelectionController {
     async getAvailableMovies() {
         return this._movieSelectionService.getAvailableMovies();
     }
-    async getRandomMovie() {
-        return this._movieSelectionService.getRandomMovie();
+    async getRandomMovie(queryOptions) {
+        return this._movieSelectionService.getRandomMovie(queryOptions);
     }
-    async addMovie(movie: Movie) {
-        return this._movieSelectionService.addMovie(movie);
-    }
-    async patchMovie() {
-        return this._movieSelectionService.patchMovie();
-    }
+    // async addMovie(movie: Movie) {
+    //     return this._movieSelectionService.addMovie(movie);
+    // }
+    // async patchMovie() {
+    //     return this._movieSelectionService.patchMovie();
+    // }
 
 }

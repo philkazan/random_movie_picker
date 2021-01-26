@@ -21,6 +21,8 @@ const container = new Container();
 
 // TODO put this in a config or something
 // TODO find a less redundant way to add the CORS response headers
+// Add Category property to Movie objects
+// extend randomMovie endpoint to take Category query param
 const DynamoClientConfig: DynamoDBClientConfig = {
     region: "us-east-1",
     credentials: {
@@ -50,16 +52,16 @@ router.get('/randomMovie', async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     ctx.set('Access-Control-Allow-Methods', 'GET');
-    ctx.body = await controller.getRandomMovie(); 
+    ctx.body = await controller.getRandomMovie(ctx.request.query); 
 })
 
-router.post('/movie', async (ctx, next) => {
-    const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
-    ctx.body = await controller.addMovie(ctx.request.body); 
-})
+// router.post('/movie', async (ctx, next) => {
+//     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
+//     ctx.set('Access-Control-Allow-Origin', '*');
+//     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+//     ctx.set('Access-Control-Allow-Methods', 'GET');
+//     ctx.body = await controller.addMovie(ctx.request.body); 
+// })
 
 // router.put('/movie', async (ctx, next) => {
 //     const controller = new MovieSelectionController();
