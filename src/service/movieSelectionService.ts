@@ -4,6 +4,7 @@ import { LocalDynamoClient } from '../client/localDynamoClient';
 import { Movie } from '../resource/movie';
 import { v4 } from 'uuid';
 import { MovieValidator } from '../validator/movieValidator';
+import { BadRequestException } from '../errors/badRequestException';
 
 @injectable()
 export class MovieSelectionService { 
@@ -52,7 +53,11 @@ export class MovieSelectionService {
         ];
         const noArgMsg = '"Category" parameter is required.';
         const wrongArgMsg = `"Category" must be one of the following: ${allowList}`;
-        if (!queryOptions.category) throw new Error(noArgMsg + ' ' + wrongArgMsg);
+        if (!queryOptions.category) throw new BadRequestException(noArgMsg);
+        if (!allowList.find( e => e === queryOptions.category)) {
+            // throw new Error(wrongArgMsg);
+            throw new BadRequestException(wrongArgMsg);
+        }
     }
 
     // async addMovie(movie: Movie) {
