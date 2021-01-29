@@ -26,6 +26,7 @@ export class MovieSelectionService {
     }
 
     async getRandomMovie(queryOptions) {
+        this.validateQueryParams(queryOptions);
         let availableMovies;
         try {
             availableMovies = await this._dbClient.query(queryOptions);
@@ -34,6 +35,24 @@ export class MovieSelectionService {
         }
         const randomIndex = Math.floor(Math.random() * availableMovies.length)
         return availableMovies[randomIndex]
+    }
+
+    private validateQueryParams(queryOptions) {
+        // needs to have CATEGORY
+        // CATEGORY needs to be one of the three values
+        // 90s Movies we Loved - 90sMoviesWeLoved
+        // 90s Movies that scared us (non-horror) - 90sMoviesThatScaredUs
+        // 80s Movies we Loved - 00sMoviesWeLoved
+        // 80s Movies that scared us (non-horror) - 80sMoviesThatScaredUs
+        const allowList = [
+            '90sMoviesWeLoved',
+            '90sMoviesThatScaredUs',
+            '80sMoviesWeLoved',
+            '80sMoviesThatScaredUs'
+        ];
+        const noArgMsg = '"Category" parameter is required.';
+        const wrongArgMsg = `"Category" must be one of the following: ${allowList}`;
+        if (!queryOptions.category) throw new Error(noArgMsg + ' ' + wrongArgMsg);
     }
 
     // async addMovie(movie: Movie) {

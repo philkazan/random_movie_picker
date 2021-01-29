@@ -52,7 +52,12 @@ router.get('/randomMovie', async (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     ctx.set('Access-Control-Allow-Methods', 'GET');
-    ctx.body = await controller.getRandomMovie(ctx.request.query); 
+    try {
+        ctx.body = await controller.getRandomMovie(ctx.request.query); 
+    } catch(e) {
+        ctx.status = e.status || 404;
+        ctx.body = e.message || 'oopsie';
+    }
 })
 
 // router.post('/movie', async (ctx, next) => {
