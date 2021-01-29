@@ -13,6 +13,7 @@ import { LocalDynamoClient } from './client/localDynamoClient'
 import { DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import { MovieSelectionController } from './controller/movieSelectionController';
 import { MovieSelectionService } from './service/movieSelectionService';
+import { BadRequestException } from './exceptions/badRequestException';
 
 
 const app = new Koa();
@@ -55,8 +56,8 @@ router.get('/randomMovie', async (ctx, next) => {
     try {
         ctx.body = await controller.getRandomMovie(ctx.request.query); 
     } catch(e) {
-        ctx.status = e.status || 404;
-        ctx.body = e.message || 'oopsie';
+        ctx.status = e.code;
+        ctx.body = e.message;
     }
 })
 
