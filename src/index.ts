@@ -61,6 +61,38 @@ router.get('/randomMovie', async (ctx, next) => {
     }
 })
 
+router.get('/categories', async (ctx, next) => {
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.body = [
+        { 
+            value: '00sMoviesWeLoved',
+            display: '00s Movies we Loved '
+        },
+        { 
+            value: '00sMoviesThatScaredUs',
+            display: '00s Movies that scared us (non-horror)'
+        },
+        { 
+            value: '90sMoviesWeLoved',
+            display: '90s Movies we Loved '
+        },
+        { 
+            value: '90sMoviesThatScaredUs',
+            display: '90s Movies that scared us (non-horror)'
+        },
+        { 
+            value: '80sMoviesWeLoved',
+            display: '80s Movies we Loved '
+        },
+        { 
+            value: '80sMoviesThatScaredUs',
+            display: '80s Movies that scared us (non-horror)'
+        }
+    ]
+});
+
 // router.post('/movie', async (ctx, next) => {
 //     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
 //     ctx.set('Access-Control-Allow-Origin', '*');
