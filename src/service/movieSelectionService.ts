@@ -34,9 +34,9 @@ export class MovieSelectionService {
         } catch (err) {
             console.log(err);
         }
-        // const randomIndex = Math.floor(Math.random() * availableMovies.length)
-        return availableMovies.find(movie => movie.title === 'Warriors of Virtue')
-        // return availableMovies[randomIndex]
+        const randomIndex = Math.floor(Math.random() * availableMovies.length)
+        // return availableMovies.find(movie => movie.title === 'Warriors of Virtue')
+        return availableMovies[randomIndex]
     }
 
     private validateQueryParams(queryOptions) {
