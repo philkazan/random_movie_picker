@@ -9,15 +9,18 @@ export class MovieSelectionController {
     constructor(@inject(SERVICES.PRIMARY) MovieSelectionService) {
         this._movieSelectionService = MovieSelectionService;
     }
+    async getMovieById(movieId: string) {
+        return this._movieSelectionService.getMovieById(movieId);
+    }
     async getAvailableMovies() {
         return this._movieSelectionService.getAvailableMovies();
     }
     async getRandomMovie(queryOptions) {
         return this._movieSelectionService.getRandomMovie(queryOptions);
     }
-    // async addMovie(movie: Movie) {
-    //     return this._movieSelectionService.addMovie(movie);
-    // }
+    async addMovie(movie: Movie) {
+        return this._movieSelectionService.addMovie(movie);
+    }
     async patchMovie(movieId: string, patchOperation: any) {
         return this._movieSelectionService.patchMovie(movieId, patchOperation);
     }

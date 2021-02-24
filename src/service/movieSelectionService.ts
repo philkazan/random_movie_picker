@@ -5,6 +5,7 @@ import { Movie } from '../resource/movie';
 import { v4 } from 'uuid';
 import { MovieValidator } from '../validator/movieValidator';
 import { BadRequestException } from '../errors/badRequestException';
+import { NotFoundException} from '../errors/notFoundException';
 import * as _ from 'underscore';
 import * as jsonpatch from 'fast-json-patch';
 
@@ -15,6 +16,20 @@ export class MovieSelectionService {
         @inject(CLIENTS.DYNAMO_CLIENT) localDynamoClient: LocalDynamoClient
     ) {
         this._dbClient = localDynamoClient;
+    }
+
+    async getMovieById(movieId: string): Promise<Movie> {
+        let movie: Movie;
+        try {
+            movie = await this._dbClient.scanById(movieId);
+        } catch (err) {
+            console.log(err);
+        }
+
+        if (!movie) {
+            throw new NotFoundException(`Movie with ID ${movieId} was not found.`);
+        }
+        return movie;
     }
     
     async getAvailableMovies() {
@@ -37,7 +52,6 @@ export class MovieSelectionService {
             console.log(err);
         }
         const randomIndex = Math.floor(Math.random() * availableMovies.length)
-        // return availableMovies.find(movie => movie.title === 'Warriors of Virtue')
         return availableMovies[randomIndex]
     }
 
@@ -62,18 +76,18 @@ export class MovieSelectionService {
         }
     }
 
-    // async addMovie(movie: Movie) {
-    //     movie.id = v4();
-    //     const mv = new MovieValidator();
-    //     mv.validate(movie);
-    //     let result;
-    //     try {
-    //         result = await this._dbClient.putItem(movie);
-    //     } catch (err) {
-    //         console.log(err);
-    //     }
-    //     return result;
-    // }
+    async addMovie(movie: Movie): Promise<Movie> {
+        movie.id = v4();
+        const mv = new MovieValidator();
+        mv.validate(movie);
+        let result: Movie;
+        try {
+            result = await this._dbClient.putItem(movie);
+        } catch (err) {
+            console.log(err);
+        }
+        return result;
+    }
 
     async patchMovie(movieId: string, patchOperation: any) {
         // fetch the specific movie from dynamo
