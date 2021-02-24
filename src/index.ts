@@ -93,13 +93,27 @@ router.get('/categories', async (ctx, next) => {
     ]
 });
 
-// router.post('/movie', async (ctx, next) => {
-//     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-//     ctx.set('Access-Control-Allow-Origin', '*');
-//     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     ctx.set('Access-Control-Allow-Methods', 'GET');
-//     ctx.body = await controller.addMovie(ctx.request.body); 
-// })
+router.get('/movie/:id', async(ctx, next) => {
+  const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
+  ctx.set('Access-Control-Allow-Origin', '*');
+  ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  ctx.set('Access-Control-Allow-Methods', 'GET');
+  try {
+    ctx.body = await controller.getMovieById(ctx.params.id); 
+  } catch(e) {
+    ctx.status = e.code;
+    ctx.body = e.message;
+  }
+})
+
+router.post('/movie', async (ctx, next) => {
+    const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.status = 201;
+    ctx.body = await controller.addMovie(ctx.request.body); 
+})
 
 router.patch('/movie/:id', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
@@ -115,14 +129,9 @@ router.get('/health', (ctx, next) => {
     ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = {
         "serviceName": "random_movie_picker",
-        "serviceVersion": "0.0.2"
+        "serviceVersion": "0.0.3"
     }
 })
-
-// router.get('/poster/:posterId', (ctx, next) => {
-//     const controller = new MovieSelectionController();
-//     ctx.body = controller.getMoviePoster(ctx.params.posterId);
-// })
 
 
 app
