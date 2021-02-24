@@ -14,12 +14,12 @@ import { DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import { MovieSelectionController } from './controller/movieSelectionController';
 import { MovieSelectionService } from './service/movieSelectionService';
 import { BadRequestException } from './exceptions/badRequestException';
+import { createTextChangeRange } from 'typescript';
 
 
 const app = new Koa();
 const router = new Router();
 const container = new Container();
-
 // TODO put this in a config or something
 // TODO find a less redundant way to add the CORS response headers
 // Add Category property to Movie objects
@@ -101,13 +101,13 @@ router.get('/categories', async (ctx, next) => {
 //     ctx.body = await controller.addMovie(ctx.request.body); 
 // })
 
-// router.put('/movie', async (ctx, next) => {
-//     const controller = new MovieSelectionController();
-//     ctx.set('Access-Control-Allow-Origin', '*');
-//     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//     ctx.set('Access-Control-Allow-Methods', 'GET');
-//     ctx.body = await controller.patchMovie(); 
-// })
+router.patch('/movie/:id', async (ctx, next) => {
+    const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.body = await controller.patchMovie(ctx.params.id, ctx.request.body); 
+})
 
 router.get('/health', (ctx, next) => {
     ctx.set('Access-Control-Allow-Origin', '*');

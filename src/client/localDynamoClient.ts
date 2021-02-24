@@ -34,13 +34,23 @@ export class LocalDynamoClient {
         return response.Items.map(m => unmarshall(m))
     }
 
-    // async putItem(movie: Movie): Promise<Movie> {
-    //     const command = new PutItemCommand({
-    //         TableName: "random-movie-picker-movies",
-    //         Item: marshall(movie),
-    //         ReturnValues: "ALL_OLD"
-    //     });
-    // await this._client.send(command);
-    // return movie;
-    // }
+    async scanById(id: string): Promise<any> {
+        // this is immediate tech debt
+        const command = new ScanCommand({
+            TableName: "random-movie-picker-movies"
+        });
+        const response = await this._client.send(command);
+        const unmarsahlledResposne = response.Items.map(m => unmarshall(m) );
+        return unmarsahlledResposne.find(m => m.id === id);
+    };
+
+    async putItem(movie: any): Promise<Movie> {
+        const command = new PutItemCommand({
+            TableName: "random-movie-picker-movies",
+            Item: marshall(movie),
+            ReturnValues: "ALL_OLD"
+        });
+       await this._client.send(command);
+        return movie;
+    }
 }

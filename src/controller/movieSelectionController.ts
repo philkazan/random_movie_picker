@@ -6,9 +6,7 @@ import { inject, injectable } from 'inversify';
 @injectable()
 export class MovieSelectionController { 
     private _movieSelectionService: MovieSelectionService;
-    constructor(
-        @inject(SERVICES.PRIMARY) MovieSelectionService
-    ) {
+    constructor(@inject(SERVICES.PRIMARY) MovieSelectionService) {
         this._movieSelectionService = MovieSelectionService;
     }
     async getAvailableMovies() {
@@ -20,8 +18,8 @@ export class MovieSelectionController {
     // async addMovie(movie: Movie) {
     //     return this._movieSelectionService.addMovie(movie);
     // }
-    // async patchMovie() {
-    //     return this._movieSelectionService.patchMovie();
-    // }
+    async patchMovie(movieId: string, patchOperation: any) {
+        return this._movieSelectionService.patchMovie(movieId, patchOperation);
+    }
 
 }

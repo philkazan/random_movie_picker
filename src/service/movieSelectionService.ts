@@ -5,6 +5,8 @@ import { Movie } from '../resource/movie';
 import { v4 } from 'uuid';
 import { MovieValidator } from '../validator/movieValidator';
 import { BadRequestException } from '../errors/badRequestException';
+import * as _ from 'underscore';
+import * as jsonpatch from 'fast-json-patch';
 
 @injectable()
 export class MovieSelectionService { 
@@ -56,7 +58,6 @@ export class MovieSelectionService {
         const wrongArgMsg = `"Category" must be one of the following: ${allowList}`;
         if (!queryOptions.category) throw new BadRequestException(noArgMsg);
         if (!allowList.find( e => e === queryOptions.category)) {
-            // throw new Error(wrongArgMsg);
             throw new BadRequestException(wrongArgMsg);
         }
     }
@@ -74,7 +75,60 @@ export class MovieSelectionService {
     //     return result;
     // }
 
-    // async patchMovie() {
-    //     throw new Error('This enpoint ain\'t been implemented');
-    // }
+    async patchMovie(movieId: string, patchOperation: any) {
+        // fetch the specific movie from dynamo
+        const existingMovie: Movie = await this._dbClient.scanById(movieId);
+
+        let result;
+        if (existingMovie) {
+            const patchedMovie = jsonpatch.applyPatch(existingMovie,patchOperation, true);
+            // this.validatePatchOp(patchOperation);
+            // const patchedMovie = this.applyPatch(existingMovie, patchOperation);
+            try{
+                result = await this._dbClient.putItem(patchedMovie.newDocument);
+            } catch (err) {
+                throw new BadRequestException(err);
+            }
+        // validate patch request - make sure they're not changing the ID
+        // persist movie to dynamo
+        } else {
+            // this should be a 404
+            throw new BadRequestException(`Movie with ID ${movieId} was not found`);
+        }
+        return result;
+    }
+
+    private validatePatchOp(patchOperation: any):void {
+        const allowedAttributes = [
+            'poster',
+            'title',
+            'releaseYear',
+            'hasBeenWatched',
+            'category'
+        ];
+
+        for(const attribute in patchOperation) {
+            if(!allowedAttributes.find(a => a === attribute)) {
+                throw new BadRequestException(`${attribute} is not allowed`);
+            }
+        }
+    }
+
+    private applyPatch(movie: Movie, patchOperation: any): Movie {
+        let patchedMovie: any = JSON.parse(JSON.stringify(movie)) // add type and fix this
+        let exceptions = '';
+        for(const key in patchOperation){
+            if (_.has(patchedMovie, key)) {
+                patchedMovie[key] = patchOperation[key];
+            } else {
+                exceptions += `| Property "${key}" is not allowed. |`;      
+            }
+        }
+
+
+        if (exceptions.length > 0) {
+            throw new BadRequestException(exceptions);
+        }
+        return patchedMovie;
+    }
 } 
