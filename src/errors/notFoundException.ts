@@ -1,11 +1,11 @@
 import {GeneralException} from './generalException';
 
-export class BadRequestException extends GeneralException {
+export class NotFoundException extends GeneralException {
     constructor(message: string = 'Bad Request.') {
         super(message);
-        Object.setPrototypeOf(this,BadRequestException.prototype);
+        Object.setPrototypeOf(this,NotFoundException.prototype);
         this.name = this.constructor.name;
         this.message = message;
-        this.code = 400;
+        this.code = 404;
     }
 }
