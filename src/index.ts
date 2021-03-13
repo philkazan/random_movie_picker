@@ -129,7 +129,7 @@ router.get('/health', (ctx, next) => {
     ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = {
         "serviceName": "random_movie_picker",
-        "serviceVersion": "0.0.3"
+        "serviceVersion": "0.0.4"
     }
 })
 
