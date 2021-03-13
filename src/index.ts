@@ -110,7 +110,7 @@ router.post('/movie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.set('Access-Control-Allow-Methods', 'POST');
     ctx.status = 201;
     ctx.body = await controller.addMovie(ctx.request.body); 
 })
@@ -119,7 +119,7 @@ router.patch('/movie/:id', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.set('Access-Control-Allow-Methods', 'PATCH');
     ctx.body = await controller.patchMovie(ctx.params.id, ctx.request.body); 
 })
 
