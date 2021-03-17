@@ -2,6 +2,7 @@ require('dotenv').config();
 import 'reflect-metadata';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
+import * as Cors from '@koa/cors';
 import { Container } from 'inversify';
 import * as bodyParser from 'koa-bodyparser';
 import CLIENTS from './constants/clients';
@@ -42,17 +43,17 @@ app.use(bodyParser());
 
 router.get('/availableMovies', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = await controller.getAvailableMovies(); 
 })
 
 router.get('/randomMovie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // ctx.set('Access-Control-Allow-Methods', 'GET');
     try {
         ctx.body = await controller.getRandomMovie(ctx.request.query); 
     } catch(e) {
@@ -62,9 +63,9 @@ router.get('/randomMovie', async (ctx, next) => {
 })
 
 router.get('/categories', async (ctx, next) => {
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = [
         { 
             value: '00sMoviesWeLoved',
@@ -108,25 +109,25 @@ router.get('/movie/:id', async(ctx, next) => {
 
 router.post('/movie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     ctx.status = 201;
     ctx.body = await controller.addMovie(ctx.request.body); 
 })
 
 router.patch('/movie/:id', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'PATCH');
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // ctx.set('Access-Control-Allow-Methods', 'PATCH');
     ctx.body = await controller.patchMovie(ctx.params.id, ctx.request.body); 
 })
 
 router.get('/health', (ctx, next) => {
-    ctx.set('Access-Control-Allow-Origin', '*');
-    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'GET');
+    // ctx.set('Access-Control-Allow-Origin', '*');
+    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    // ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = {
         "serviceName": "random_movie_picker",
         "serviceVersion": "0.0.4"
@@ -135,6 +136,7 @@ router.get('/health', (ctx, next) => {
 
 
 app
+  .use(Cors())
   .use(router.routes())
   .use(router.allowedMethods());
 
