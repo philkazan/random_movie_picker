@@ -1,4 +1,4 @@
-import { BadRequestException } from '../exceptions/badRequestException';
+import { BadRequestException } from '../errors/badRequestException';
 import {Movie} from '../resource/movie';
 
 export class MovieValidator {
@@ -6,31 +6,27 @@ export class MovieValidator {
     // method takes in a Movie object
     // start with a simple concatenated string for error message
     // then maybe figure out nested errors
-    private _validationException: string;
+    private _validationException: string = '';
 
     
     validate(movie: Movie) {
-        if (typeof movie.title !== 'string') {
-            this._validationException += ' Movie must be a string.'
-        }
-        if (!movie.title || movie.title.trim() === '') {
-            this._validationException += ' Movie title is missing.'
-        }
-        if (typeof movie.poster !== 'string') {
-            this._validationException += ' Movie\'s poster must be a string.'
-        }
-        if ( !movie.poster || movie.poster.trim() === '') {
-            this._validationException += ' Movie poster is missing.'
-        }
-        if (typeof movie.year !== 'string') {
-            this._validationException += ' Movie.year must be a string'
-        }
-        if ( !movie.year || movie.year.trim() === '') {
-            this._validationException += ' Movie year is missing';
-        }
+        this.validateRequiredStringField(movie.title, 'title');
+        this.validateRequiredStringField(movie.category, 'category');
+        this.validateRequiredStringField(movie.poster, 'poster');
+        this.validateRequiredStringField(movie.releaseYear, 'releaseYear');
 
         if (this._validationException) {
             throw new BadRequestException(this._validationException);
+        }
+    }
+
+    validateRequiredStringField(field: string, fieldName: string) {
+        if (typeof field !== 'string') {
+            this._validationException += `Movie's ${fieldName} attribute must be a string.`
+        }
+
+        if (!field || field.trim() === '') {
+            this._validationException += `Movie's ${fieldName} attribute is required.`;
         }
     }
 }
