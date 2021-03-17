@@ -14,8 +14,6 @@ import { LocalDynamoClient } from './client/localDynamoClient'
 import { DynamoDBClientConfig } from '@aws-sdk/client-dynamodb';
 import { MovieSelectionController } from './controller/movieSelectionController';
 import { MovieSelectionService } from './service/movieSelectionService';
-import { BadRequestException } from './exceptions/badRequestException';
-import { createTextChangeRange } from 'typescript';
 
 
 const app = new Koa();
@@ -43,17 +41,11 @@ app.use(bodyParser());
 
 router.get('/availableMovies', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = await controller.getAvailableMovies(); 
 })
 
 router.get('/randomMovie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'GET');
     try {
         ctx.body = await controller.getRandomMovie(ctx.request.query); 
     } catch(e) {
@@ -63,9 +55,6 @@ router.get('/randomMovie', async (ctx, next) => {
 })
 
 router.get('/categories', async (ctx, next) => {
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = [
         { 
             value: '00sMoviesWeLoved',
@@ -96,9 +85,6 @@ router.get('/categories', async (ctx, next) => {
 
 router.get('/movie/:id', async(ctx, next) => {
   const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-//   ctx.set('Access-Control-Allow-Origin', '*');
-//   ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   ctx.set('Access-Control-Allow-Methods', 'GET');
   try {
     ctx.body = await controller.getMovieById(ctx.params.id); 
   } catch(e) {
@@ -109,28 +95,24 @@ router.get('/movie/:id', async(ctx, next) => {
 
 router.post('/movie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
     ctx.status = 201;
-    ctx.body = await controller.addMovie(ctx.request.body); 
+    try {
+        ctx.body = await controller.addMovie(ctx.request.body); 
+    } catch (e) {
+        ctx.status = e.code;
+        ctx.body = e.message;
+    }
 })
 
 router.patch('/movie/:id', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'PATCH');
     ctx.body = await controller.patchMovie(ctx.params.id, ctx.request.body); 
 })
 
 router.get('/health', (ctx, next) => {
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = {
         "serviceName": "random_movie_picker",
-        "serviceVersion": "0.0.4"
+        "serviceVersion": "0.0.5"
     }
 })
 
