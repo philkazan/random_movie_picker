@@ -1,23 +1,27 @@
 export class Movie {
-    private _title: string;
-    private _year: string;
-    private _poster: string;
+    private _category: string;
     private _id: string;
+    private _poster: string;
+    private _releaseYear: string;
+    private _title: string;
 
-    constructor(title: string, year: string) {
+    constructor(title: string, releaseYear: string) {
         this._title = title;
-        this._year = year;
+        this._releaseYear = releaseYear;
+    }
+    get category(): string {
+        return this._category;
     }
     set id(id: string) {
         this._id = id;
     }
-    get title() {
-        return this._title;
-    }
-    get year() {
-        return this._year;
-    }
     get poster() {
         return this._poster;
+    }
+    get releaseYear() {
+        return this._releaseYear;
+    }
+    get title() {
+        return this._title;
     }
 }
