@@ -50,9 +50,9 @@ router.get('/availableMovies', async (ctx, next) => {
 
 router.get('/randomMovie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
     try {
         ctx.body = await controller.getRandomMovie(ctx.request.query); 
     } catch(e) {
@@ -62,9 +62,9 @@ router.get('/randomMovie', async (ctx, next) => {
 })
 
 router.get('/categories', async (ctx, next) => {
-    // ctx.set('Access-Control-Allow-Origin', '*');
-    // ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    // ctx.set('Access-Control-Allow-Methods', 'GET');
+    ctx.set('Access-Control-Allow-Origin', '*');
+    ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.body = [
         { 
             value: '00sMoviesWeLoved',
@@ -110,7 +110,7 @@ router.post('/movie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
     ctx.set('Access-Control-Allow-Origin', '*');
     ctx.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-    ctx.set('Access-Control-Allow-Methods', 'POST');
+    ctx.set('Access-Control-Allow-Methods', 'GET');
     ctx.status = 201;
     ctx.body = await controller.addMovie(ctx.request.body); 
 })
