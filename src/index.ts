@@ -1,5 +1,6 @@
 require('dotenv').config();
 import 'reflect-metadata';
+import axios from 'axios';
 import * as Koa from 'koa';
 import * as Router from '@koa/router';
 import * as Cors from '@koa/cors';
@@ -42,6 +43,31 @@ app.use(bodyParser());
 router.get('/availableMovies', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
     ctx.body = await controller.getAvailableMovies(); 
+});
+
+router.get('/updateMovies', async (ctx, next) => {
+    const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
+    const movies = await controller.getAvailableMovies();
+    for(let i=0; i< movies.length; i++) {
+        const result = await (await axios.get(`https://www.omdbapi.com/?t=${movies[i].title}&y=${movies[i].releaseYear}&apikey=95dd8229`))?.data;
+        // overwrite dynamo entry with result from omdbapi...mostly
+        if (result.Response !== 'False') {
+            movies[i].genre = result['Genre'];
+            movies[i].plot = result['Plot'];
+            movies[i].director = result['Director'];
+            movies[i].rtRating = result['Ratings']?.find(rating => rating.Source === "Rotten Tomatoes")?.Value || "N/A";
+            movies[i].imdbRating = result['imdbRating'] || 'N/A';
+            movies[i].mcRating = result['Metascore'] || 'N/A';
+            movies[i].runTime = result['RunTime'] || 'N/A';
+            movies[i].actors = result['Actors'] || 'N/A';
+            movies[i].poster = result['Poster'];
+            movies[i].released = result['Released'] || movies[i].released;
+            movies[i].genre = result['Genre'];
+            const response = await controller.addMovie(movies[i]);
+            console.log(`Updated ${response.title}`);
+        }
+    }
+
 })
 
 router.get('/randomMovie', async (ctx, next) => {
@@ -52,7 +78,7 @@ router.get('/randomMovie', async (ctx, next) => {
         ctx.status = e.code;
         ctx.body = e.message;
     }
-})
+});
 
 router.get('/categories', async (ctx, next) => {
     ctx.body = [
@@ -91,7 +117,7 @@ router.get('/movie/:id', async(ctx, next) => {
     ctx.status = e.code;
     ctx.body = e.message;
   }
-})
+});
 
 router.post('/movie', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
@@ -102,19 +128,19 @@ router.post('/movie', async (ctx, next) => {
         ctx.status = e.code;
         ctx.body = e.message;
     }
-})
+});
 
 router.patch('/movie/:id', async (ctx, next) => {
     const controller: MovieSelectionController = container.get(CONTROLLERS.PRIMARY);
     ctx.body = await controller.patchMovie(ctx.params.id, ctx.request.body); 
-})
+});
 
 router.get('/health', (ctx, next) => {
     ctx.body = {
         "serviceName": "random_movie_picker",
         "serviceVersion": "0.0.5"
     }
-})
+});
 
 
 app

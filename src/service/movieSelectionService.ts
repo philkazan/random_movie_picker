@@ -63,6 +63,7 @@ export class MovieSelectionService {
         // 80s Movies we Loved - 00sMoviesWeLoved
         // 80s Movies that scared us (non-horror) - 80sMoviesThatScaredUs
         const allowList = [
+            'Christmas',
             '90sMoviesWeLoved',
             '90sMoviesThatScaredUs',
             '80sMoviesWeLoved',
@@ -77,7 +78,9 @@ export class MovieSelectionService {
     }
 
     async addMovie(movie: Movie): Promise<Movie> {
-        movie.id = v4();
+        if (!movie.id) {
+            movie.id = v4();
+        }
         const mv = new MovieValidator();
         mv.validate(movie);
         let result: Movie;

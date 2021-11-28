@@ -13,7 +13,7 @@ export class MovieValidator {
         this.validateRequiredStringField(movie.title, 'title');
         this.validateRequiredStringField(movie.category, 'category');
         this.validateRequiredStringField(movie.poster, 'poster');
-        this.validateRequiredStringField(movie.releaseYear, 'releaseYear');
+        this.validateRequiredStringField(movie.released, 'released');
 
         if (this._validationException) {
             throw new BadRequestException(this._validationException);
