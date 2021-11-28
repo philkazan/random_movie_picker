@@ -138,7 +138,7 @@ router.patch('/movie/:id', async (ctx, next) => {
 router.get('/health', (ctx, next) => {
     ctx.body = {
         "serviceName": "random_movie_picker",
-        "serviceVersion": "0.0.5"
+        "serviceVersion": "0.0.6"
     }
 });
 
